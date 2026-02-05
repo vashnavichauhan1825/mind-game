@@ -1,13 +1,9 @@
 import Tile from "./Tile";
-import { GameState } from "../types";
-import { GameAction } from "../gameActions";
+import { useGame } from "../useGame";
 
-interface GameBoardProps {
-  state: GameState;
-  dispatch: React.Dispatch<GameAction>;
-}
+function GameBoard() {
+  const { state } = useGame();
 
-function GameBoard({ state, dispatch }: GameBoardProps) {
   return (
     <div className="w-full max-w-2xl mx-auto">
       <div className="grid grid-cols-4 gap-3 sm:gap-4">
@@ -18,7 +14,6 @@ function GameBoard({ state, dispatch }: GameBoardProps) {
             iconId={tile.iconId}
             isFlipped={state.flippedIds.includes(tile.id)}
             isMatched={state.matchedIds.includes(tile.id)}
-            dispatch={dispatch}
           />
         ))}
       </div>

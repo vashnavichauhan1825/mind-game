@@ -1,14 +1,16 @@
-import { GameAction, flipTile } from "../gameActions";
+import { flipTile } from "../gameActions";
+import { useGame } from "../useGame";
 
 interface TileProps {
   id: number;
   iconId: number;
   isFlipped: boolean;
   isMatched: boolean;
-  dispatch: React.Dispatch<GameAction>;
 }
 
-function Tile({ id, iconId, isFlipped, isMatched, dispatch }: TileProps) {
+function Tile({ id, iconId, isFlipped, isMatched }: TileProps) {
+  const { dispatch } = useGame();
+
   const handleClick = () => {
     if (!isFlipped && !isMatched) {
       dispatch(flipTile(id));
