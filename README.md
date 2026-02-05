@@ -1,70 +1,124 @@
-# Getting Started with Create React App
+# Memory Game
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A modern, interactive memory card matching game built with React, TypeScript, and Tailwind CSS. Test your memory skills by matching pairs of cards in the fewest moves possible.
 
-## Available Scripts
+## Project Overview
 
-In the project directory, you can run:
+Memory Game is a classic card matching game where players flip cards to reveal icons and match pairs. The game features smooth animations, responsive design, and an intuitive user interface. Built with modern web technologies for optimal performance and user experience.
 
-### `npm start`
+## Features
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- **Card Matching Gameplay**: Flip cards to reveal icons and match pairs
+- **Move Counter**: Track your progress with a move counter
+- **Win Detection**: Automatic win detection when all pairs are matched
+- **3D Card Flip Animations**: Smooth, visually appealing card flip transitions
+- **Board Locking**: Prevents rapid clicking during card reveal animations
+- **Responsive Design**: Fully responsive layout that works on all screen sizes
+- **Modern UI**: Beautiful gradient design with Tailwind CSS
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Bonus Features
 
-### `npm test`
+- **Confetti Celebration**: Animated confetti effect when you win
+- **Play Again**: Quick restart functionality to play multiple rounds
+- **Optimized Performance**: React.memo for tile components and efficient state management
+- **TypeScript**: Full type safety throughout the application
+- **Feature-Based Architecture**: Clean, scalable code organization
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Setup Instructions
 
-### `npm run build`
+### Prerequisites
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- Node.js (v16 or higher)
+- npm or yarn
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Installation
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+1. Clone the repository:
 
-### `npm run eject`
+```bash
+git clone <repository-url>
+cd mind-game
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+2. Install dependencies:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```bash
+npm install
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+3. Start the development server:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```bash
+npm run dev
+```
 
-## Learn More
+4. Open your browser and navigate to `http://localhost:5173`
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Build for Production
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```bash
+npm run build
+```
 
-### Code Splitting
+### Preview Production Build
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+```bash
+npm run preview
+```
 
-### Analyzing the Bundle Size
+## Folder Structure
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+```
+mind-game/
+├── src/
+│   ├── features/
+│   │   └── memory-game/          # Main game feature module
+│   │       ├── components/       # React components
+│   │       │   ├── GameBoard.tsx      # Main game board container
+│   │       │   ├── GameScreen.tsx     # Game screen wrapper
+│   │       │   ├── Tile.tsx          # Individual card tile component
+│   │       │   ├── WelcomeScreen.tsx  # Welcome/start screen
+│   │       │   └── Won.tsx            # Win screen with confetti
+│   │       ├── constants/        # Game configuration constants
+│   │       │   ├── actionTypes.ts     # Action type definitions
+│   │       │   └── gameConfig.ts      # Game configuration (tiles, pairs, etc.)
+│   │       ├── context/          # React context providers
+│   │       │   ├── GameProvider.tsx   # Game state provider
+│   │       │   └── types.ts          # Context type definitions
+│   │       ├── hooks/            # Custom React hooks
+│   │       │   ├── useGame.ts        # Game context hook
+│   │       │   └── useGameLogic.ts   # Game logic and matching logic
+│   │       ├── store/            # State management (Redux-like pattern)
+│   │       │   ├── actions.ts        # Action creators
+│   │       │   ├── initialState.ts   # Initial game state
+│   │       │   ├── reducer.ts        # State reducer function
+│   │       │   └── types.ts          # State and action types
+│   │       ├── types/            # TypeScript interfaces
+│   │       │   └── interface.ts      # Component prop interfaces
+│   │       └── utils/            # Utility functions
+│   │           ├── generateDeck.ts    # Deck generation logic
+│   │           └── shuffle.ts        # Array shuffling utility
+│   ├── app/                      # App-level components
+│   ├── styles/                   # Global styles
+│   └── main.tsx                  # Application entry point
+├── public/                       # Static assets
+├── package.json                  # Dependencies and scripts
+├── vite.config.ts               # Vite configuration
+├── tailwind.config.js           # Tailwind CSS configuration
+└── tsconfig.json                # TypeScript configuration
+```
 
-### Making a Progressive Web App
+### Architecture Notes
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+- **Feature-Based Structure**: The game follows a feature-based architecture, with all game-related code organized under `features/memory-game/`
+- **State Management**: Uses a custom reducer pattern with React Context for state management
+- **Component Organization**: Components are separated by responsibility (UI, logic, state)
+- **Type Safety**: Full TypeScript coverage with interfaces and types defined in dedicated files
 
-### Advanced Configuration
+## Technologies Used
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- **React 19** - UI library
+- **TypeScript** - Type safety
+- **Vite** - Build tool and dev server
+- **Tailwind CSS** - Utility-first CSS framework
+- **react-confetti** - Confetti animation library
