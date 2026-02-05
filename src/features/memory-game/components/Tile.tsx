@@ -2,9 +2,10 @@ import { useState } from "react";
 
 interface TileProps {
   id: number;
+  iconId: number;
 }
 
-function Tile({ id }: TileProps) {
+function Tile({ id, iconId }: TileProps) {
   const [isFlipped, setIsFlipped] = useState(false);
 
   const handleClick = () => {
@@ -43,7 +44,7 @@ function Tile({ id }: TileProps) {
             transform: "rotateY(180deg)",
           }}
         >
-          <span className="text-5xl">★</span>
+          <span className="text-5xl">{iconId}</span>
         </div>
       </div>
     </div>
