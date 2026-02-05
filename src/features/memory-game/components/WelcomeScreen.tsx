@@ -4,8 +4,8 @@ interface WelcomeScreenProps {
 
 function WelcomeScreen({ onStart }: WelcomeScreenProps) {
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen p-6 bg-gradient-to-br from-gray-900 to-gray-800 text-white">
-      <div className="max-w-md w-full text-center space-y-8">
+    <div className="flex flex-col items-center justify-center min-h-screen p-6 text-white w-full">
+      <div className="w-full text-center space-y-8">
         <h1 className="text-5xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
           Memory Game
         </h1>

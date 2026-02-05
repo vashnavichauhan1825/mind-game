@@ -9,11 +9,11 @@ function App() {
     setGameStarted(true);
   };
 
-  if (!gameStarted) {
-    return <WelcomeScreen onStart={handleStart} />;
-  }
-
-  return <GameScreen />;
+  return (
+    <div className="max-w-2xl mx-auto w-full bg-black min-h-screen">
+      {!gameStarted ? <WelcomeScreen onStart={handleStart} /> : <GameScreen />}
+    </div>
+  );
 }
 
 export default App;
