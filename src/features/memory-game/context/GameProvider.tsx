@@ -6,11 +6,12 @@ import {
   useEffect,
   ReactNode,
 } from "react";
-import { gameReducer } from "./gameReducer";
-import { resetGame } from "./gameActions";
-import { generateDeck } from "./utils/generateDeck";
-import { GameState } from "./types";
-import { GameAction } from "./gameActions";
+import { gameReducer } from "../store/reducer";
+import { resetGame } from "../store/actions";
+import { generateDeck } from "../utils/generateDeck";
+import { GameState } from "../store/types";
+import { GameAction } from "../store/actions";
+import { createInitialState } from "../store/initialState";
 
 interface GameContextValue {
   state: GameState;
@@ -23,22 +24,13 @@ interface GameProviderProps {
   children: ReactNode;
 }
 
-const initialState: GameState = {
-  deck: [],
-  flippedIds: [],
-  matchedIds: [],
-  moves: 0,
-  status: "idle",
-  boardLocked: false,
-};
-
 export function GameProvider({ children }: GameProviderProps) {
   const initialDeck = useMemo(() => generateDeck(), []);
 
-  const [state, dispatch] = useReducer(gameReducer, {
-    ...initialState,
-    deck: initialDeck,
-  });
+  const [state, dispatch] = useReducer(
+    gameReducer,
+    createInitialState(initialDeck),
+  );
 
   useEffect(() => {
     dispatch(resetGame(initialDeck));

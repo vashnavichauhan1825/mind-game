@@ -1,8 +1,10 @@
 import Tile from "./Tile";
-import { useGame } from "../useGame";
+import { useGame } from "../hooks/useGame";
+import { useGameLogic } from "../hooks/useGameLogic";
 
 function GameBoard() {
   const { state } = useGame();
+  useGameLogic();
 
   return (
     <div className="w-full max-w-2xl mx-auto">

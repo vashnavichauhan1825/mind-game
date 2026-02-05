@@ -3,7 +3,11 @@ export interface Tile {
   iconId: number;
 }
 
-export type GameStatus = "idle" | "playing" | "won";
+export enum GameStatus {
+  IDLE = "idle",
+  PLAYING = "playing",
+  WON = "WON",
+}
 
 export interface GameState {
   deck: Tile[];

@@ -1,5 +1,5 @@
 import { Tile } from "./types";
-import { GAME_ACTIONS } from "./constants";
+import { GAME_ACTIONS } from "../constants/actionTypes";
 
 export type GameAction =
   | { type: typeof GAME_ACTIONS.FLIP_TILE; payload: { tileId: number } }

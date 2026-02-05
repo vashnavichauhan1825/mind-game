@@ -1,6 +1,7 @@
-import { flipTile } from "../gameActions";
-import { useGame } from "../useGame";
-import { GAME_CONFIG } from "../constants";
+import { flipTile } from "../store/actions";
+import { useGame } from "../hooks/useGame";
+import { GAME_CONFIG } from "../constants/gameConfig";
+import { GameStatus } from "../store/types";
 
 interface TileProps {
   id: number;
@@ -13,6 +14,10 @@ function Tile({ id, iconId, isFlipped, isMatched }: TileProps) {
   const { state, dispatch } = useGame();
 
   const handleClick = () => {
+    if (state.status === GameStatus.WON) {
+      return;
+    }
+
     if (isFlipped) {
       return;
     }
@@ -33,6 +38,7 @@ function Tile({ id, iconId, isFlipped, isMatched }: TileProps) {
   };
 
   const isClickable =
+    state.status !== GameStatus.WON &&
     !isFlipped &&
     !isMatched &&
     !state.boardLocked &&
