@@ -1,6 +1,6 @@
-import { Tile } from "../types";
+import { Tile } from "../types.ts";
 import { shuffle } from "./shuffle";
-import { GAME_CONFIG } from "../constants";
+import { GAME_CONFIG } from "../constants.ts";
 
 export function generateDeck(): Tile[] {
   const pairs: Tile[] = [];

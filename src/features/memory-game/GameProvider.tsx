@@ -29,6 +29,7 @@ const initialState: GameState = {
   matchedIds: [],
   moves: 0,
   status: "idle",
+  boardLocked: false,
 };
 
 export function GameProvider({ children }: GameProviderProps) {

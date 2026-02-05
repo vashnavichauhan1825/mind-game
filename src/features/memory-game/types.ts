@@ -11,4 +11,5 @@ export interface GameState {
   matchedIds: number[];
   moves: number;
   status: GameStatus;
+  boardLocked: boolean;
 }

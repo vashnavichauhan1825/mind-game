@@ -1,5 +1,5 @@
 import GameBoard from "./GameBoard";
-import { GameProvider } from "../GameProvider";
+import { GameProvider } from "../GameProvider.tsx";
 
 function GameScreen() {
   return (

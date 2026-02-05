@@ -21,6 +21,10 @@ function Tile({ id, iconId, isFlipped, isMatched }: TileProps) {
       return;
     }
 
+    if (state.boardLocked) {
+      return;
+    }
+
     if (state.flippedIds.length >= GAME_CONFIG.MAX_FLIPPED_TILES) {
       return;
     }
@@ -31,6 +35,7 @@ function Tile({ id, iconId, isFlipped, isMatched }: TileProps) {
   const isClickable =
     !isFlipped &&
     !isMatched &&
+    !state.boardLocked &&
     state.flippedIds.length < GAME_CONFIG.MAX_FLIPPED_TILES;
 
   return (
@@ -42,11 +47,12 @@ function Tile({ id, iconId, isFlipped, isMatched }: TileProps) {
     >
       <div
         className={`relative w-full h-full preserve-3d transition-transform duration-500 ${
-          isFlipped ? "rotate-y-180" : ""
+          isFlipped || isMatched ? "rotate-y-180" : ""
         }`}
         style={{
           transformStyle: "preserve-3d",
-          transform: isFlipped ? "rotateY(180deg)" : "rotateY(0deg)",
+          transform:
+            isFlipped || isMatched ? "rotateY(180deg)" : "rotateY(0deg)",
         }}
       >
         <div

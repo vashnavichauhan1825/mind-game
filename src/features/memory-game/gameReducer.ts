@@ -9,7 +9,8 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
 
       if (
         state.flippedIds.includes(tileId) ||
-        state.matchedIds.includes(tileId)
+        state.matchedIds.includes(tileId) ||
+        state.boardLocked
       ) {
         return state;
       }
@@ -29,6 +30,29 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
       };
     }
 
+    case GAME_ACTIONS.MARK_MATCHED: {
+      const { tileIds } = action.payload;
+      return {
+        ...state,
+        matchedIds: [...state.matchedIds, ...tileIds],
+        flippedIds: state.flippedIds.filter((id) => !tileIds.includes(id)),
+      };
+    }
+
+    case GAME_ACTIONS.FLIP_BACK: {
+      return {
+        ...state,
+        flippedIds: [],
+      };
+    }
+
+    case GAME_ACTIONS.SET_BOARD_LOCKED: {
+      return {
+        ...state,
+        boardLocked: action.payload.locked,
+      };
+    }
+
     case GAME_ACTIONS.RESET_GAME: {
       return {
         deck: action.payload.deck,
@@ -36,6 +60,7 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
         matchedIds: [],
         moves: 0,
         status: "idle" as GameStatus,
+        boardLocked: false,
       };
     }
 
