@@ -1,9 +1,27 @@
+import { useState, useEffect } from "react";
+import Confetti from "react-confetti";
 import { useGame } from "../hooks/useGame";
 import { resetGame } from "../store/actions";
 import { generateDeck } from "../utils/generateDeck";
 
 function Won() {
   const { state, dispatch } = useGame();
+  const [windowDimensions, setWindowDimensions] = useState({
+    width: window.innerWidth,
+    height: window.innerHeight,
+  });
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowDimensions({
+        width: window.innerWidth,
+        height: window.innerHeight,
+      });
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const handlePlayAgain = () => {
     const newDeck = generateDeck();
@@ -11,12 +29,19 @@ function Won() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen p-4 sm:p-6 text-white w-full">
+    <div className="flex flex-col items-center justify-center min-h-screen p-4 sm:p-6 text-white w-full relative">
+      <Confetti
+        width={windowDimensions.width}
+        height={windowDimensions.height}
+        recycle={false}
+        numberOfPieces={800}
+        gravity={0.3}
+      />
       <div className="w-full text-center space-y-4 sm:space-y-6 md:space-y-8">
         <div className="text-4xl sm:text-5xl md:text-6xl mb-2 sm:mb-3 md:mb-4">
           🎉
         </div>
-        <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-2 sm:mb-3 md:mb-4 bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent px-2">
+        <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-2 mt-0 sm:mb-3 md:mb-4 bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent px-2">
           Congratulations!
         </h1>
 
@@ -24,7 +49,7 @@ function Won() {
           <p className="leading-relaxed">
             You've successfully matched all the pairs!
           </p>
-          <div className="mt-4 sm:mt-6 p-3 sm:p-4 bg-gray-800 rounded-lg border border-gray-700">
+          <div className="mt-4 sm:mt-6 p-3 sm:p-4">
             <p className="text-xl sm:text-2xl font-semibold text-blue-400">
               Moves: {state.moves}
             </p>

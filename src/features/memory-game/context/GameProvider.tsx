@@ -4,25 +4,14 @@ import {
   useReducer,
   useMemo,
   useEffect,
-  ReactNode,
 } from "react";
 import { gameReducer } from "../store/reducer";
 import { resetGame } from "../store/actions";
 import { generateDeck } from "../utils/generateDeck";
-import { GameState } from "../store/types";
-import { GameAction } from "../store/actions";
 import { createInitialState } from "../store/initialState";
-
-interface GameContextValue {
-  state: GameState;
-  dispatch: React.Dispatch<GameAction>;
-}
+import { GameContextValue, GameProviderProps } from "./types";
 
 const GameContext = createContext<GameContextValue | undefined>(undefined);
-
-interface GameProviderProps {
-  children: ReactNode;
-}
 
 export function GameProvider({ children }: GameProviderProps) {
   const initialDeck = useMemo(() => generateDeck(), []);

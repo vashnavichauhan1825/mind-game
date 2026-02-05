@@ -1,16 +1,16 @@
+import React from "react";
 import { flipTile } from "../store/actions";
 import { useGame } from "../hooks/useGame";
 import { GAME_CONFIG } from "../constants/gameConfig";
 import { GameStatus } from "../store/types";
+import { TileProps } from "../types/interface";
 
-interface TileProps {
-  id: number;
-  iconId: number;
-  isFlipped: boolean;
-  isMatched: boolean;
-}
-
-function Tile({ id, iconId, isFlipped, isMatched }: TileProps) {
+const Tile = React.memo(function Tile({
+  id,
+  iconId,
+  isFlipped,
+  isMatched,
+}: TileProps) {
   const { state, dispatch } = useGame();
 
   const handleClick = () => {
@@ -84,6 +84,6 @@ function Tile({ id, iconId, isFlipped, isMatched }: TileProps) {
       </div>
     </div>
   );
-}
+});
 
 export default Tile;

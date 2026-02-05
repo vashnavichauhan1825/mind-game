@@ -1,6 +1,4 @@
-interface WelcomeScreenProps {
-  onStart: () => void;
-}
+import { WelcomeScreenProps } from "../types/interface";
 
 function WelcomeScreen({ onStart }: WelcomeScreenProps) {
   return (
