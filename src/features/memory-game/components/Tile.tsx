@@ -1,5 +1,6 @@
 import { flipTile } from "../gameActions";
 import { useGame } from "../useGame";
+import { GAME_CONFIG } from "../constants";
 
 interface TileProps {
   id: number;
@@ -9,17 +10,34 @@ interface TileProps {
 }
 
 function Tile({ id, iconId, isFlipped, isMatched }: TileProps) {
-  const { dispatch } = useGame();
+  const { state, dispatch } = useGame();
 
   const handleClick = () => {
-    if (!isFlipped && !isMatched) {
-      dispatch(flipTile(id));
+    if (isFlipped) {
+      return;
     }
+
+    if (isMatched) {
+      return;
+    }
+
+    if (state.flippedIds.length >= GAME_CONFIG.MAX_FLIPPED_TILES) {
+      return;
+    }
+
+    dispatch(flipTile(id));
   };
+
+  const isClickable =
+    !isFlipped &&
+    !isMatched &&
+    state.flippedIds.length < GAME_CONFIG.MAX_FLIPPED_TILES;
 
   return (
     <div
-      className="aspect-square cursor-pointer perspective-1000"
+      className={`aspect-square perspective-1000 ${
+        isClickable ? "cursor-pointer" : "cursor-not-allowed opacity-75"
+      }`}
       onClick={handleClick}
     >
       <div
